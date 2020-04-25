@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <a class="active" href="#home">Home</a>
+  <a href="#news">Add Expense</a>
+  <a href="#contact">Review Expenses</a>
+  <a href="#about">Edit Profile</a>
+</div>
+
+<div class="content">
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+
+    </div>
+    <div class="col-sm">
+        <h1> Add Expenses</h1>
+    </div>
+    <div class="col-sm">
+
+    </div>
+  </div>
+    </div>
+  <div class="container">
+  <div class="row">
+    <div class="col-sm">
+
+    </div>
+    <div class="col-sm">
+      <form method="post">
+          {%csrf_token%}
+          {{form.as_p}}
+          <input type="submit">
+      </form>
+    </div>
+
+    <div class="col-sm">
+
+    </div>
+  </div>
+</div>
+
+     <div class="container">
+
+    <table >
+  <thead>
+    <tr>
+
+      <th scope="col">Category</th>
+      <th scope="col">Amount</th>
+      <th scope="col">ShortNote</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  {%for data in qs %}
+    <tr>
+      <td>{{data.category}}</td>
+      <td>{{data.amount}}</td>
+      <td>{{data.shornote}}</td>
+      <td>{{data.date}}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+     </div>
+</div>
+</body>
+</html>
